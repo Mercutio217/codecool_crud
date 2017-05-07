@@ -16,7 +16,7 @@ public class JDBCHandler {
 
         try {
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:src/main/resources/db/eventcrud.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:src/main/resources/database/eventcrud.db");
             statement = conn.createStatement();
             conn.setAutoCommit(false);
         } catch (SQLException | ClassNotFoundException e) {
