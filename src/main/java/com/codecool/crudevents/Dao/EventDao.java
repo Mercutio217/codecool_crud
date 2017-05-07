@@ -19,7 +19,10 @@ public class EventDao {
     public ArrayList<Event> convertToEvents() {
         ArrayList<Event> result = new ArrayList<>();
         try {
-            ResultSet dbResult = database.executeSelectQuerfy(String query);
+            ResultSet dbResult = database.executeSelectQuery("SELECT events.id, name, start_date, end_date, info, additional_info \n" +
+                    "FROM events JOIN descriptions \n" +
+                    "ON (events.description_id = descriptions.id);");
+            Event addMe = new Event(dbResult.getString()
         }
     }
 }
