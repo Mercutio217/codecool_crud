@@ -1,8 +1,10 @@
 package com.codecool.crudevents.Dao;
 
+import com.codecool.crudevents.model.Description;
 import com.codecool.crudevents.model.Event;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +24,20 @@ public class EventDao {
             ResultSet dbResult = database.executeSelectQuery("SELECT events.id, name, start_date, end_date, info, additional_info \n" +
                     "FROM events JOIN descriptions \n" +
                     "ON (events.description_id = descriptions.id);");
-            Event addMe = new Event(dbResult.getString()
+            while (dbResult.next()) {
+                Event addMe = new Event(dbResult.getInt(1), dbResult.getString(2),
+                        dbResult.getString(3), dbResult.getString(4),
+                        new Description(dbResult.getString(5), dbResult.getString(6)));
+                result.add(addMe);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        EventDao testDao = new EventDao();
+        System.out.println(testDao.convertToEvents());
     }
 }

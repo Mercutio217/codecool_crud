@@ -26,6 +26,14 @@ public class Event {
         this.description = description;
     }
 
+    public Event(Integer id, String name, String startDate, String endDate, Description description) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.description = description;
+    }
+
     public Integer getId() {
         return id;
     }
