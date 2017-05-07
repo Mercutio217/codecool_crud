@@ -17,6 +17,11 @@ public class Description {
         this.additionalInfo = additionalInfo;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s \n %s", this.info, this.additionalInfo);
+    }
+
     public String getBasicInfo() {
         return info;
     }

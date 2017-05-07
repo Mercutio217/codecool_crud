@@ -34,6 +34,12 @@ public class Event {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%d %s start: %s end: %s \n %s \n \n", this.id, this.name, this.startDate, this.endDate,
+                this.description);
+    }
+
     public Integer getId() {
         return id;
     }
