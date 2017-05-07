@@ -1,5 +1,6 @@
 package com.codecool.crudevents.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -8,17 +9,19 @@ import java.util.Calendar;
 public class Event {
 
     private String name;
-    private Calendar startDate;
-    private Calendar endDate;
+    private String startDate;
+    private String endDate;
     private Description description;
 
     public Event(String name) {
         this.name = name;
     }
-    public Event(String name, Calendar startDate, Calendar endDate, Description description) {
+
+    public Event(String name, String startDate, String endDate, Description description) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
     }
+
 }
