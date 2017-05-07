@@ -12,6 +12,9 @@ public class Event {
     private Calendar endDate;
     private Description description;
 
+    public Event(String name) {
+        this.name = name;
+    }
     public Event(String name, Calendar startDate, Calendar endDate, Description description) {
         this.name = name;
         this.startDate = startDate;

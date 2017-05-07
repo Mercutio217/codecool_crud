@@ -7,8 +7,14 @@ public class Description {
     private String basicInfo;
     private String additionalInfo;
 
+
     public Description(String basicInfo) {
         this.basicInfo = basicInfo;
+    }
+
+    public Description(String basicInfo, String additionalInfo) {
+        this.basicInfo = basicInfo;
+        this.additionalInfo = additionalInfo;
     }
 
     public String getBasicInfo() {
