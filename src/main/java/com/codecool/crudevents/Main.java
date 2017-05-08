@@ -20,10 +20,15 @@ public class Main {
         ArrayList<Event> eventList = kontrol.getListOfEvents();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("events", eventList);
+        staticFileLocation("/css/");
         ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
         ModelAndView model = new ModelAndView(resultMap, "hello");
-        staticFileLocation("/css/");
-        get("/hello", (request, response) -> templateEngine.render(model));
+        ModelAndView finalModel = model;
+        get("/index", (request, response) -> templateEngine.render(finalModel));
+        model = new ModelAndView(resultMap, "details");
+        ModelAndView finalModel1 = model;
+        get("/details", (request, response) -> templateEngine.render(finalModel1));
+
 
     }
 
