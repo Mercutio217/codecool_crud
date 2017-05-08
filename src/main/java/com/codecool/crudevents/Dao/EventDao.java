@@ -18,7 +18,7 @@ public class EventDao {
         this.database = JDBCHandler.getInstance();
     }
 
-    public ArrayList<Event> convertToEvents() {
+    public ArrayList<Event> convertAllToEvents() {
         ArrayList<Event> result = new ArrayList<>();
         try {
             ResultSet dbResult = database.executeSelectQuery("SELECT events.id, name, start_date, end_date, info, additional_info \n" +
@@ -36,8 +36,26 @@ public class EventDao {
         return result;
     }
 
+    public Event getObjectById(Integer eventId) {
+        try {
+            ResultSet dbResult = database.executeSelectQuery(String.format("SELECT events.id, name, start_date, end_date, info, additional_info FROM events JOIN descriptions ON (events.description_id = descriptions.id) WHERE events.id = %d;", eventId));
+            if (dbResult.next()) {
+                Event result = new Event(dbResult.getInt(1), dbResult.getString(2),
+                        dbResult.getString(3), dbResult.getString(4),
+                        new Description(dbResult.getString(5), dbResult.getString(6)));
+                return result;
+
+            } else {
+                throw new SQLException();
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL exeption in getObjectByID!!");
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         EventDao testDao = new EventDao();
-        System.out.println(testDao.convertToEvents());
+        System.out.println(testDao.convertAllToEvents());
     }
 }

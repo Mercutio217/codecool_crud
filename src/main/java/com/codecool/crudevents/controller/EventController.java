@@ -2,7 +2,6 @@ package com.codecool.crudevents.controller;
 
 import com.codecool.crudevents.Dao.EventDao;
 import com.codecool.crudevents.model.Event;
-import com.codecool.crudevents.model.Description;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +15,7 @@ public class EventController {
     private EventDao defaultDaou = new EventDao();
 
     public EventController() {
-        this.listOfEvents = defaultDaou.convertToEvents();
+        this.listOfEvents = defaultDaou.convertAllToEvents();
     }
 
     public ArrayList<Event> getListOfEvents() {
