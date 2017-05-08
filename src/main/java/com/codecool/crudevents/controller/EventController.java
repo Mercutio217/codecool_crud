@@ -12,14 +12,18 @@ import java.util.HashMap;
  */
 public class EventController {
     private ArrayList<Event> listOfEvents;
-    private EventDao defaultDaou = new EventDao();
+    private EventDao defaultDao = new EventDao();
 
     public EventController() {
-        this.listOfEvents = defaultDaou.convertAllToEvents();
+        this.listOfEvents = defaultDao.convertAllToEvents();
     }
 
     public ArrayList<Event> getListOfEvents() {
         return listOfEvents;
+    }
+
+    public EventDao getDefaultDao() {
+        return this.defaultDao;
     }
 
     public HashMap<String, String> getDictofEvents() {

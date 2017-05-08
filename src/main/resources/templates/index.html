@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{../css/style.css}"/>
+    <script src="/js/js.js" th:inline="javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>index</title>
 </head>
 <body>
-$END$
+<header><h1>Welcome to event cośtam</h1></header>
+<article><h1>Employees</h1>
+    <table>
+        <th:block th:each="event : ${events}">
+            <tr>
+                <td th:text="${event.id}">1</td>
+                <td th:text="${event.name}">001</td>
+                <td><a th:href="@{details}">Details</a></td>
+            </tr>
+        </th:block>
+    </table>
+    <p th:class="hide">New menu</p>
+</article>
+<footer>2017 Landryn company</footer>
 </body>
 </html>

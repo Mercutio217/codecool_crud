@@ -53,9 +53,4 @@ public class EventDao {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        EventDao testDao = new EventDao();
-        System.out.println(testDao.convertAllToEvents());
-    }
 }
