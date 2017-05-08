@@ -17,15 +17,13 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         EventController kontrol = new EventController();
-        ArrayList<Event> lista = kontrol.getListOfEvents();
-        System.out.println(lista);
-        Map<String, String> mapa = new HashMap<>();
-        mapa.put("dupa", "jajco");
-        mapa.put("oranrrr", "lolololol");
+        ArrayList<Event> eventList = kontrol.getListOfEvents();
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("events", eventList);
         ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
-        ModelAndView model = new ModelAndView(mapa, "hello");
-        get("/", (request, response) -> "Hello, nygga!");
-        get("/hello", (request, response) -> model, templateEngine);
+        ModelAndView model = new ModelAndView(resultMap, "hello");
+        staticFileLocation("/css/");
+        get("/hello", (request, response) -> templateEngine.render(model));
 
     }
 
