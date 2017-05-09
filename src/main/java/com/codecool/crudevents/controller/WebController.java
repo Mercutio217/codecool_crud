@@ -42,7 +42,7 @@ public class WebController {
         }));
     }
 
-    public String showDetails(Integer id) {
+    public String getDetails(Integer id) {
         ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("event", deffaultController.getDefaultDao().getObjectById(id));
@@ -50,6 +50,12 @@ public class WebController {
         ModelAndView model = new ModelAndView(resultMap, "details");
         return templateEngine.render(model);
 
+
+    }
+
+    public void showDetails() {
+        get("/details/:name", (request, response) ->
+                this.getDetails(Integer.parseInt(request.params(":name"))));
 
     }
 

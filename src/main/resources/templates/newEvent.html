@@ -1,0 +1,26 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/style.css" th:href="@{../css/style.css}"/>
+    <script src="/js/js.js" th:inline="javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>index</title>
+</head>
+<body>
+<header><h1>Welcome to event cośtam</h1></header>
+<article>
+    <form action="/new" method="POST">
+        <input class="form-control" id="txt_memberid" name="txt_memberid" placeholder="MemberId" type="text" value=""/>
+        <input class="form-control" id="txt_username" name="txt_username" placeholder="Username" type="text" value=""/>
+        <input class="form-control" id="txt_password" name="txt_password" placeholder="Password" type="password"
+               value=""/>
+        <input id="btn_login" name="btn_login" type="submit" class="btn btn-default" value="Login"/>
+    </form>
+</article>
+<footer>2017 Landryn company</footer>
+</body>
+</html>
