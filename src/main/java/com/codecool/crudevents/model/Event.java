@@ -11,6 +11,7 @@ public class Event {
 
     private Integer id;
     private String name;
+    private Category category;
     private String startDate;
     private String endDate;
     private Description description;
@@ -19,16 +20,18 @@ public class Event {
         this.name = name;
     }
 
-    public Event(String name, String startDate, String endDate, Description description) {
+    public Event(String name, Category category, String startDate, String endDate, Description description) {
         this.name = name;
+        this.category = category;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
     }
 
-    public Event(Integer id, String name, String startDate, String endDate, Description description) {
+    public Event(Integer id, String name, Category category, String startDate, String endDate, Description description) {
         this.id = id;
         this.name = name;
+        this.category = category;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
@@ -38,6 +41,14 @@ public class Event {
     public String toString() {
         return String.format("%d %s start: %s end: %s \n %s \n \n", this.id, this.name, this.startDate, this.endDate,
                 this.description);
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Integer getId() {
