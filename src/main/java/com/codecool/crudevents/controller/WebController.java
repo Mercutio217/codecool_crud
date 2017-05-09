@@ -4,7 +4,10 @@ import static spark.Spark.*;
 
 import com.codecool.crudevents.controller.EventController;
 import com.codecool.crudevents.model.Event;
+import org.thymeleaf.context.Context;
 import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import java.util.ArrayList;
@@ -24,20 +27,30 @@ public class WebController {
         ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
         Map<String, Object> allEventsMap = new HashMap<>();
         allEventsMap.put("events", eventList);
+        allEventsMap.put("control", this);
         ModelAndView model = new ModelAndView(allEventsMap, "index");
 
-        get("/", (request, response) -> templateEngine.render(model));
+        get("/", (request, response) -> {
+            return templateEngine.render(model);
+        });
     }
 
-    public void showDetails(Integer id) {
+    public void goBack() {
+        get("details/back", ((Request request, Response response) -> {
+            response.redirect("/");
+            return "";
+        }));
+    }
+
+    public String showDetails(Integer id) {
         ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put(id.toString(), deffaultController.getDefaultDao().getObjectById(id));
-        ModelAndView model = new ModelAndView(resultMap, "description");
-        get("/description/:id", (request, response) -> templateEngine.render(model));
+        resultMap.put("event", deffaultController.getDefaultDao().getObjectById(id));
+        resultMap.put("id", id);
+        ModelAndView model = new ModelAndView(resultMap, "details");
+        return templateEngine.render(model);
 
 
     }
-
 
 }

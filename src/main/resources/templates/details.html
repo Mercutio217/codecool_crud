@@ -13,7 +13,11 @@
 <body>
 <header><h1>Welcome to event cośtam</h1></header>
 <article>
-    <h1>Dupa</h1>
+    <h1 th:text="${event.getName()}">Dupa</h1>
+    <p th:text="${event.getDescription().getBasicInfo()}">Description</p>
+    <br>
+    <p th:text="${event.getDescription().getAdditionalInfo()}">additional</p>
+    <a th:href="@{'back'}">Go back</a>
 </article>
 <footer>2017 Landryn company</footer>
 </body>

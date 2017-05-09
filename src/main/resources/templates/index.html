@@ -17,7 +17,7 @@
             <tr>
                 <td th:text="${event.id}">1</td>
                 <td th:text="${event.name}">001</td>
-                <td><a th:href="@{details}">Details</a></td>
+                <td><a th:href="@{'details/' + ${event.id}}">Show description</a></td>
             </tr>
         </th:block>
     </table>

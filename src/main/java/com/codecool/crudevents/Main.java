@@ -20,7 +20,9 @@ public class Main {
 
     public static void main(String[] args) {
         defaultWeb.showIndex();
-
+//        defaultWeb.showDetails();
+        defaultWeb.goBack();
+        get("/details/:name", (request, response) -> defaultWeb.showDetails(Integer.parseInt(request.params(":name"))));
     }
 
 
