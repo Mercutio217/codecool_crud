@@ -1,7 +1,4 @@
 package com.codecool.crudevents;
-
-import static spark.Spark.*;
-
 import com.codecool.crudevents.controller.WebController;
 
 /**
