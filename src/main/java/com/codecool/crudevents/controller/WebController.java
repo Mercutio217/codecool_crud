@@ -71,5 +71,18 @@ public class WebController {
         return resultList;
     }
 
+    public String showByCategory() {
+        get("/find/:name", ((request, response) -> {
+            List<Event> value = getByCategory(request.params(":name"));
+            HashMap<String, List<Event>> resultMap = new HashMap<>();
+            resultMap.put("event", value);
+            ModelAndView model = new ModelAndView(resultMap, "index");
+            ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
+            return templateEngine.render(model);
+
+        }
+        ))
+    }
+
 
 }
