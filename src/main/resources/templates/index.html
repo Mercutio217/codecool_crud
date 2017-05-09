@@ -4,15 +4,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{css/style.css}"/>
-    <!--<script src="/js/js.js" th:inline="javascript"></script>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/js/js.js" th:inline="javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>index</title>
 </head>
 <body>
 <header><h1>Welcome to event cośtam</h1></header>
 <article><h1>Employees</h1>
-    <table>
+
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            <li th:each="category : ${category_list}" th:text="${category.getName()}">coś z listy</li>
+        </ul>
+    </div>
+
+    <table class="table">
         <th:block th:each="event : ${events}">
             <tr>
                 <td th:text="${event.id}">1</td>

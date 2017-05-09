@@ -1,5 +1,6 @@
 package com.codecool.crudevents.controller;
 
+import com.codecool.crudevents.Dao.CategoryDao;
 import com.codecool.crudevents.Dao.EventDao;
 import com.codecool.crudevents.model.Event;
 
@@ -13,6 +14,7 @@ import java.util.HashMap;
 public class EventController {
     private ArrayList<Event> listOfEvents;
     private EventDao defaultDao = new EventDao();
+    private CategoryDao categoryDao = new CategoryDao();
 
     public EventController() {
         this.listOfEvents = defaultDao.convertAllToEvents();
@@ -37,5 +39,9 @@ public class EventController {
 
         }
         return result;
+    }
+
+    public CategoryDao getCategoryDao() {
+        return categoryDao;
     }
 }
