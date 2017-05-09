@@ -13,12 +13,19 @@
 <body>
 <header><h1>Welcome to event cośtam</h1></header>
 <article>
-    <form action="/new" method="POST">
-        <input class="form-control" id="txt_memberid" name="txt_memberid" placeholder="MemberId" type="text" value=""/>
-        <input class="form-control" id="txt_username" name="txt_username" placeholder="Username" type="text" value=""/>
-        <input class="form-control" id="txt_password" name="txt_password" placeholder="Password" type="password"
-               value=""/>
-        <input id="btn_login" name="btn_login" type="submit" class="btn btn-default" value="Login"/>
+
+
+    <form action="/locationAccepted" method="GET">
+        <input type="text" name="userLocation"/>
+        <div class="button">
+            <button type="submit">Send your message</button>
+        </div>
+    </form>
+
+    <form th:action="@{/}" method="post">
+        <input class="form-control" name="event_name" placeholder="MemberId" type="text" value=""/>
+        <input class="form-control" name="event_description" placeholder="Username" type="text" value=""/>
+        <input id="btn_login" name="login" type="submit" class="btn btn-default" value="Login"/>
     </form>
 </article>
 <footer>2017 Landryn company</footer>

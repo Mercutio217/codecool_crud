@@ -58,7 +58,7 @@ public class WebController {
 
     }
 
-    public List<Event> getByCategory(String name) {
+    public String getByCategory(String name) {
         List<Event> resultList = new ArrayList<>();
         while (eventList.iterator().hasNext()) {
             Event itrNext = eventList.iterator().next();
@@ -67,21 +67,25 @@ public class WebController {
                 resultList.add(itrNext);
 
             }
+
+
         }
-        return resultList;
+        HashMap<String, List<Event>> resultMap = new HashMap<>();
+        resultMap.put("events", resultList);
+        ModelAndView model = new ModelAndView(resultMap, "index");
+        ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
+        return templateEngine.render(model);
     }
 
-    public String showByCategory() {
-        get("/find/:name", ((request, response) -> {
-            List<Event> value = getByCategory(request.params(":name"));
-            HashMap<String, List<Event>> resultMap = new HashMap<>();
-            resultMap.put("event", value);
-            ModelAndView model = new ModelAndView(resultMap, "index");
-            ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
-            return templateEngine.render(model);
+    public void showByCategory() {
+        get("/find/:name", (request, response) -> getByCategory(request.params(":name")));
+    }
 
-        }
-        ))
+    public void showAddForm() {
+        ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
+        HashMap<String, Object> defaultMap = new HashMap<>();
+        ModelAndView model = new ModelAndView(defaultMap, "newEvent");
+        get("/add_event", ((request, response) -> templateEngine.render(model)));
     }
 
 

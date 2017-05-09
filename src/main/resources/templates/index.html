@@ -8,19 +8,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/js.js" th:inline="javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>index</title>
 </head>
 <body>
 <header><h1>Welcome to event cośtam</h1></header>
 <article><h1>Employees</h1>
 
-    <div class="dropdown">
+    <div class="dropdown show">
         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
         </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-            <li th:each="category : ${category_list}" th:text="${category.getName()}">coś z listy</li>
-        </ul>
+        <div class="dropdown-menu" role="menu" aria-labelledby="menu1" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false">
+            <a th:each="category : ${category_list}" th:href="@{'find/' + ${category.getName()}}" class="dropdown-item"
+               th:text="${category.getName()}"></a><br>
+        </div>
     </div>
 
     <table class="table">
@@ -32,7 +33,7 @@
             </tr>
         </th:block>
     </table>
-    <p th:class="hide">New menu</p>
+    <a th:href="@{add_event}">Add event</a>
 </article>
 <footer>2017 Landryn company</footer>
 </body>

@@ -10,6 +10,8 @@ public class Main {
     public static void main(String[] args) {
         defaultWeb.showIndex();
         defaultWeb.showDetails();
+        defaultWeb.showByCategory();
+        defaultWeb.showAddForm();
         defaultWeb.goBack();
     }
 
