@@ -9,9 +9,7 @@ import spark.Request;
 import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -43,7 +41,7 @@ public class WebController {
         }));
     }
 
-    public String getDetails(Integer id) {
+    public String getEventDetails(Integer id) {
         ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("event", eventController.getDefaultDao().getObjectById(id));
@@ -56,8 +54,22 @@ public class WebController {
 
     public void showDetails() {
         get("/details/:name", (request, response) ->
-                getDetails(Integer.parseInt(request.params(":name"))));
+                getEventDetails(Integer.parseInt(request.params(":name"))));
 
     }
+
+    public List<Event> getByCategory(String name) {
+        List<Event> resultList = new ArrayList<>();
+        while (eventList.iterator().hasNext()) {
+            Event itrNext = eventList.iterator().next();
+
+            if (Objects.equals(itrNext.getCategory().getName(), name)) {
+                resultList.add(itrNext);
+
+            }
+        }
+        return resultList;
+    }
+
 
 }
