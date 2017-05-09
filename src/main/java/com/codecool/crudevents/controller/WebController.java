@@ -88,5 +88,13 @@ public class WebController {
         get("/add_event", ((request, response) -> templateEngine.render(model)));
     }
 
+    public void addEvent() {
+        ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
+        HashMap<String, Object> defaultMap = new HashMap<>();
+        ModelAndView model = new ModelAndView(defaultMap, "index");
+        post("/add_event", (((request, response) -> request.queryMap())));
+
+    }
+
 
 }
