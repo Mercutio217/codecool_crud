@@ -41,19 +41,15 @@ public class EventDao {
 
     public Event getObjectById(Integer eventId) {
         try {
-            ResultSet dbResult = database.executeSelectQuery(String.format("SELECT events.id, events.name, categories.name,\n" +
-                    "\" +\n" +
-                    "                    \" start_date, end_date, info, additional_info FROM events\\n\" +\n" +
-                    "                    \" JOIN descriptions ON (events.description_id = descriptions.id)\\n\" +\n" +
-                    "                    \" JOIN categories ON (events.category_id = categories.id) WHERE events.id = %d;", eventId));
-            if (dbResult.next()) {
+            ResultSet dbResult = database.executeSelectQuery(String.format("SELECT events.id, events.name, categories.name, start_date, end_date, info, additional_info FROM events JOIN descriptions ON (events.description_id = descriptions.id) JOIN categories ON (events.category_id = categories.id) WHERE events.id = %d;", eventId));
+            if (!dbResult.next()) {
+                throw new SQLException();
+            } else {
                 return new Event(dbResult.getInt(1), dbResult.getString(2),
-                        new Category(dbResult.getString(3)), dbResult.getString(4),
-                        dbResult.getString(5),
+                        new Category(dbResult.getString(3)),
+                        dbResult.getString(4), dbResult.getString(5),
                         new Description(dbResult.getString(6), dbResult.getString(7)));
 
-            } else {
-                throw new SQLException();
             }
         } catch (SQLException e) {
             System.out.println("SQL exeption in getObjectByID!!");

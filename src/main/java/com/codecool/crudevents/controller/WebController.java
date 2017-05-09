@@ -2,9 +2,7 @@ package com.codecool.crudevents.controller;
 
 import static spark.Spark.*;
 
-import com.codecool.crudevents.controller.EventController;
 import com.codecool.crudevents.model.Event;
-import org.thymeleaf.context.Context;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -19,8 +17,8 @@ import java.util.Map;
  * Created by mercutio on 08.05.17.
  */
 public class WebController {
-    EventController deffaultController = new EventController();
-    ArrayList<Event> eventList = deffaultController.getListOfEvents();
+    EventController defaultController = new EventController();
+    ArrayList<Event> eventList = defaultController.getListOfEvents();
 
 
     public void showIndex() {
@@ -45,7 +43,7 @@ public class WebController {
     public String getDetails(Integer id) {
         ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("event", deffaultController.getDefaultDao().getObjectById(id));
+        resultMap.put("event", defaultController.getDefaultDao().getObjectById(id));
         resultMap.put("id", id);
         ModelAndView model = new ModelAndView(resultMap, "details");
         return templateEngine.render(model);
@@ -55,7 +53,7 @@ public class WebController {
 
     public void showDetails() {
         get("/details/:name", (request, response) ->
-                this.getDetails(Integer.parseInt(request.params(":name"))));
+                getDetails(Integer.parseInt(request.params(":name"))));
 
     }
 
