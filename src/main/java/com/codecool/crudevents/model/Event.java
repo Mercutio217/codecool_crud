@@ -92,12 +92,12 @@ public class Event {
     }
 
     public String getHttpName() {
-        String result = this.getName().replaceAll(" {1,2}", "+");
+        String result = this.getName().replaceAll(" +", "+");
         return result;
     }
 
     public String getHttpDescription() {
-        String result = this.getCategory().getName().replaceAll(" {1,2}", "+");
+        String result = this.getCategory().getHttpName();
         return result;
     }
 

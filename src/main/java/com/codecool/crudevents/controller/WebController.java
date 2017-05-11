@@ -64,7 +64,7 @@ public class WebController {
         while (iterator.hasNext()) {
             Event itrNext = iterator.next();
 
-            if (Objects.equals(itrNext.getCategory().getName(), name)) {
+            if ((Objects.equals(itrNext.getCategory().getName(), name)) || (Objects.equals(itrNext.getCategory().getHttpName(), name))) {
                 resultList.add(itrNext);
 
             }

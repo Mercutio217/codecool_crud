@@ -19,8 +19,8 @@
         </button>
         <!--<div class="dropdown-menu" role="menu" aria-labelledby="menu1" data-toggle="dropdown" aria-haspopup="true"-->
         <!--aria-expanded="false">-->
-            <a th:each="category : ${category_list}" th:href="@{'find/' + ${category.getName()}}" class="dropdown-item"
-               th:text="${category.getName()}"></a><br>
+        <a th:each="category : ${category_list}" th:href="@{'find/' + ${category.getHttpName()}}" class="dropdown-item"
+           th:text="${category.getName()}"></a><br>
         <!--</div>-->
     </div>
 
@@ -29,7 +29,7 @@
             <tr>
                 <td th:text="${event.id}">1</td>
                 <td th:text="${event.name}">001</td>
-                <td><a th:href="@{'details/' + ${event.id}}">Show description</a></td>
+                <td><a th:href="@{'~/details/' + ${event.id}}">Show description</a></td>
             </tr>
         </th:block>
     </table>

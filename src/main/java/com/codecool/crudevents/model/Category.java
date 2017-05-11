@@ -19,6 +19,11 @@ public class Category {
         return name;
     }
 
+    public String getHttpName() {
+        String result = this.getName().replaceAll(" {1,2}", "+");
+        return result;
+    }
+
     public static List<Category> getListOfCategories() {
         return listOfCategories;
     }
