@@ -91,5 +91,18 @@ public class Event {
         this.description = description;
     }
 
+    public String getHttpName() {
+        String result = this.getName().replaceAll(" {1,2}", "+");
+        return result;
+    }
 
+    public String getHttpDescription() {
+        String result = this.getCategory().getName().replaceAll(" {1,2}", "+");
+        return result;
+    }
+
+    public static void main(String[] args) {
+
+
+    }
 }

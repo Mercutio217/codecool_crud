@@ -13,6 +13,7 @@ public class Main {
         defaultWeb.showByCategory();
         defaultWeb.showAddForm();
         defaultWeb.goBack();
+        defaultWeb.addEvent();
     }
 
 

@@ -60,8 +60,9 @@ public class WebController {
 
     public String getByCategory(String name) {
         List<Event> resultList = new ArrayList<>();
-        while (eventList.iterator().hasNext()) {
-            Event itrNext = eventList.iterator().next();
+        Iterator<Event> iterator = this.eventList.iterator();
+        while (iterator.hasNext()) {
+            Event itrNext = iterator.next();
 
             if (Objects.equals(itrNext.getCategory().getName(), name)) {
                 resultList.add(itrNext);
@@ -91,8 +92,12 @@ public class WebController {
     public void addEvent() {
         ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
         HashMap<String, Object> defaultMap = new HashMap<>();
-        ModelAndView model = new ModelAndView(defaultMap, "index");
-        post("/add_event", (((request, response) -> request.queryMap())));
+        ModelAndView model = new ModelAndView(defaultMap, "newEvent");
+        post("/add_event", (((request, response) -> {
+            String name = request.queryParams("event_name");
+            String description = request.queryParams("event_description");
+            return name + description;
+        })));
 
     }
 
