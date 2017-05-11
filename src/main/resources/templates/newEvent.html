@@ -16,10 +16,15 @@
 
 
     <form th:action="@{add_event}" method="post">
-        <input class="form-control" name="event_name" placeholder="MemberId" type="text" value=""/>
-        <input class="form-control" name="event_description" placeholder="Username" type="text" value=""/>
+        <input class="form-control" name="event_name" placeholder="Name" type="text" value=""/>
 
-        <input id="btn_login" name="login" type="submit" class="btn btn-default" value="Login"/>
+
+        <input class="form-control" type="date" name="event_startdate" placeholder="Date when event's start">
+        <input class="form-control" type="date" name="event_enddate" placeholder="Date when event's end">
+        <input class="form-control" name="event_description" placeholder="Description" type="text" value=""/>
+        <input class="form-control" name="event_additional_info" placeholder="Description" type="text" value=""/>
+
+        <input id="btn_login" name="submit" type="submit" class="btn btn-default" value="Add Event"/>
     </form>
 </article>
 <footer>2017 Landryn company</footer>
