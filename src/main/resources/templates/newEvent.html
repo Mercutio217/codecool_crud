@@ -18,8 +18,8 @@
     <form th:action="@{add_event}" method="post">
         <input class="form-control" name="event_name" placeholder="Name" type="text" value=""/>
         <select name="category">
-            <th:block th:each="category : ${}">
-                <option value="volvo">Volvo</option>
+            <th:block th:each="category : ${categories}">
+                <option th:text="${category.getName()}" th:value="${category.getName()}">Volvo</option>
             </th:block>
 
         </select>

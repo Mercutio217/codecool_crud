@@ -3,6 +3,7 @@ package com.codecool.crudevents.controller;
 import static spark.Spark.*;
 
 import com.codecool.crudevents.model.Category;
+import com.codecool.crudevents.model.Description;
 import com.codecool.crudevents.model.Event;
 import spark.ModelAndView;
 import spark.Request;
@@ -96,7 +97,23 @@ public class WebController {
         ModelAndView model = new ModelAndView(defaultMap, "newEvent");
         post("/add_event", (((request, response) -> {
             String name = request.queryParams("event_name");
-            String description = request.queryParams("event_description");
+            String categoryName = request.queryParams("category");
+            Category category = new Category(categoryName);
+            Event newEvent = new Event(name, category);
+            newEvent.setStartDate(request.queryParams("event_startDate"));
+            if (!newEvent.setStartDate(request.queryParams("event_startDate"))) {
+                return false;
+            }
+            newEvent.setEndDate(request.queryParams("event_endDate"));
+            if (!newEvent.setEndDate(request.queryParams("event_endDate"))) {
+                return false;
+            }
+            Description description =
+                    new Description(request.queryParams("event_description"), request.queryParams("event_additional_info"));
+            newEvent.setDescription(description);
+
+);
+
             return name + description;
         })));
 
