@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/js/js.js" th:inline="javascript"></script>
+    <title>index</title>
+</head>
+<body>
+<header><h1>Welcome to event crud</h1></header>
+<article>
+
+    <div class="dropdown show">
+        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
+        </button>
+        <div class="dropdown-menu" role="menu" aria-labelledby="menu1" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="true">
+        <a th:each="category : ${category_list}" th:href="@{'find/' + ${category.getHttpName()}}" class="dropdown-item"
+           th:text="${category.getName()}"></a><br>
+        </div>
+    </div>
+
+    <table class="table">
+        <th:block th:each="event : ${events}">
+            <tr>
+                <td th:text="${event.id}">1</td>
+                <td th:text="${event.name}">001</td>
+                <td><a th:href="@{'~/details/' + ${event.id}}">Show description</a></td>
+            </tr>
+        </th:block>
+    </table>
+    <a th:href="@{add_event}">Add event</a>
+</article>
+<footer>2017 Landryn company</footer>
+</body>
+</html>

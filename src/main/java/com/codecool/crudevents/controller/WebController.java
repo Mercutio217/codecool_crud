@@ -100,7 +100,7 @@ public class WebController {
                 routeMap.put("invalid_end_date", "Invalid format of end date!");
             }
             if (!newEvent.setStartDate(request.queryParams("event_startdate")) || !newEvent.setEndDate(request.queryParams("event_enddate"))) {
-                return thymeEngine.render(createModelAndView(routeMap, "add_event"));
+                return thymeEngine.render(createModelAndView(routeMap, "newEvent"));
             }
             Description description =
                     new Description(request.queryParams("event_description"), request.queryParams("event_additional_info"));
