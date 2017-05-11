@@ -85,6 +85,7 @@ public class WebController {
     public void showAddForm() {
         ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
         HashMap<String, Object> defaultMap = new HashMap<>();
+        defaultMap.put("categories", categoryList);
         ModelAndView model = new ModelAndView(defaultMap, "newEvent");
         get("/add_event", ((request, response) -> templateEngine.render(model)));
     }

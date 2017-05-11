@@ -17,6 +17,12 @@
 
     <form th:action="@{add_event}" method="post">
         <input class="form-control" name="event_name" placeholder="Name" type="text" value=""/>
+        <select name="category">
+            <th:block th:each="category : ${}">
+                <option value="volvo">Volvo</option>
+            </th:block>
+
+        </select>
 
 
         <input class="form-control" type="date" name="event_startdate" placeholder="Date when event's start">
