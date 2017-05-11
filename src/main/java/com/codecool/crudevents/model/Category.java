@@ -12,9 +12,23 @@ public class Category {
     private String name;
     private static List<Category> listOfCategories = new ArrayList<>();
 
+    public Category(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+        listOfCategories.add(this);
+    }
+
     public Category(String name) {
         this.name = name;
         listOfCategories.add(this);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

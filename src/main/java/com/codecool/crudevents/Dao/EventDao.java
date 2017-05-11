@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class EventDao {
 
     private JDBCHandler database;
+    private DescriptionDao descriptionDatabase = new DescriptionDao();
 
     public EventDao() {
         this.database = JDBCHandler.getInstance();
@@ -52,9 +53,16 @@ public class EventDao {
 
             }
         } catch (SQLException e) {
-            System.out.println("SQL exeption in getObjectByID!!");
+            System.out.println("SQL exception in getObjectByID!!");
         }
         return null;
+    }
+
+    public void addEvent(Event event) {
+        descriptionDatabase.addDescription(event.getDescription());
+        database.executeUpdateQuery(String.format("INSERT INTO events (name, description_id, start_date, end_date, category_id) VALUES ('%s', %d, '%s', '%s', %d);",
+                event.getName(), descriptionDatabase.getLastRecordId(),
+                event.getStartDate(), event.getEndDate(), event.getCategory().getId()));
     }
 
 }

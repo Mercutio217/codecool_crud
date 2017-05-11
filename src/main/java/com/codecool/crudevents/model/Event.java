@@ -26,7 +26,6 @@ public class Event {
     public Event(String name, Category category) {
         this.name = name;
         this.category = category;
-        this.description = description;
     }
 
     public Event(Integer id, String name, Category category, String startDate, String endDate, Description description) {

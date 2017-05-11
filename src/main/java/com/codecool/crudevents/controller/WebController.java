@@ -20,18 +20,20 @@ public class WebController {
     EventController eventController = new EventController();
     ArrayList<Event> eventList = eventController.getListOfEvents();
     ArrayList<Category> categoryList = eventController.getCategoryDao().getCategories();
+    ThymeleafTemplateEngine thymeEngine = new ThymeleafTemplateEngine();
+    HashMap<String, Object> routeMap = new HashMap<>();
 
-
+    public ModelAndView createModelAndView(Object object, String viewName) {
+        return new ModelAndView(object, viewName);
+    }
     public void showIndex() {
-        ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
-        Map<String, Object> allEventsMap = new HashMap<>();
-        allEventsMap.put("events", eventList);
-        allEventsMap.put("control", this);
-        allEventsMap.put("category_list", categoryList);
-        ModelAndView model = new ModelAndView(allEventsMap, "index");
+        routeMap.put("events", eventList);
+        routeMap.put("control", this);
+        routeMap.put("category_list", categoryList);
+        ModelAndView model = createModelAndView(routeMap, "index");
 
         get("/", (request, response) -> {
-            return templateEngine.render(model);
+            return thymeEngine.render(model);
         });
     }
 
@@ -43,12 +45,9 @@ public class WebController {
     }
 
     public String getEventDetails(Integer id) {
-        ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("event", eventController.getDefaultDao().getObjectById(id));
-        resultMap.put("id", id);
-        ModelAndView model = new ModelAndView(resultMap, "details");
-        return templateEngine.render(model);
+        routeMap.put("event", eventController.getDefaultDao().getObjectById(id));
+        routeMap.put("id", id);
+        return thymeEngine.render(createModelAndView(routeMap, "details"));
 
 
     }
@@ -72,11 +71,9 @@ public class WebController {
 
 
         }
-        HashMap<String, List<Event>> resultMap = new HashMap<>();
-        resultMap.put("events", resultList);
-        ModelAndView model = new ModelAndView(resultMap, "index");
-        ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
-        return templateEngine.render(model);
+        routeMap.put("events", resultList);
+
+        return thymeEngine.render(createModelAndView(routeMap, "index"));
     }
 
     public void showByCategory() {
@@ -84,38 +81,54 @@ public class WebController {
     }
 
     public void showAddForm() {
-        ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
-        HashMap<String, Object> defaultMap = new HashMap<>();
-        defaultMap.put("categories", categoryList);
-        ModelAndView model = new ModelAndView(defaultMap, "newEvent");
-        get("/add_event", ((request, response) -> templateEngine.render(model)));
+        routeMap.put("categories", categoryList);
+        get("/add_event", ((request, response) -> thymeEngine.render(createModelAndView(routeMap, "newEvent"))));
     }
 
     public void addEvent() {
-        ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
-        HashMap<String, Object> defaultMap = new HashMap<>();
-        ModelAndView model = new ModelAndView(defaultMap, "newEvent");
         post("/add_event", (((request, response) -> {
             String name = request.queryParams("event_name");
             String categoryName = request.queryParams("category");
             Category category = new Category(categoryName);
             Event newEvent = new Event(name, category);
-            newEvent.setStartDate(request.queryParams("event_startDate"));
-            if (!newEvent.setStartDate(request.queryParams("event_startDate"))) {
-                return false;
+            newEvent.setStartDate(request.queryParams("event_startdate"));
+            if (!newEvent.setStartDate(request.queryParams("event_startdate"))) {
+                routeMap.put("invalid_start_date", "Invalid format of start date!");
             }
-            newEvent.setEndDate(request.queryParams("event_endDate"));
-            if (!newEvent.setEndDate(request.queryParams("event_endDate"))) {
-                return false;
+            newEvent.setEndDate(request.queryParams("event_enddate"));
+            if (!newEvent.setEndDate(request.queryParams("event_enddate"))) {
+                routeMap.put("invalid_end_date", "Invalid format of end date!");
+            }
+            if (!newEvent.setStartDate(request.queryParams("event_startdate")) || !newEvent.setEndDate(request.queryParams("event_enddate"))) {
+                return thymeEngine.render(createModelAndView(routeMap, "add_event"));
             }
             Description description =
                     new Description(request.queryParams("event_description"), request.queryParams("event_additional_info"));
             newEvent.setDescription(description);
+            eventController.getDefaultDao().addEvent(newEvent);
 
-);
-
-            return name + description;
+            return newEvent.getName();
         })));
+
+    }
+
+    public static void main(String[] args) {
+        String name = "lololololo";
+        String categoryName = "Java";
+        Category category = new Category(categoryName);
+        category.setId(3);
+        Event newEvent = new Event(name, category);
+        newEvent.setStartDate("12.01.1999");
+
+        newEvent.setEndDate("13.01.2000");
+
+        Description description =
+                new Description("kurwa lol", "lolololol");
+        newEvent.setDescription(description);
+        EventController eventController = new EventController();
+        System.out.println(newEvent.getCategory().getId());
+
+        eventController.getDefaultDao().addEvent(newEvent);
 
     }
 
