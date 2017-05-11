@@ -89,7 +89,7 @@ public class WebController {
         post("/add_event", (((request, response) -> {
             String name = request.queryParams("event_name");
             String categoryName = request.queryParams("category");
-            Category category = new Category(categoryName);
+            Category category = Category.findByName(categoryName);
             Event newEvent = new Event(name, category);
             newEvent.setStartDate(request.queryParams("event_startdate"));
             if (!newEvent.setStartDate(request.queryParams("event_startdate"))) {
@@ -113,22 +113,6 @@ public class WebController {
     }
 
     public static void main(String[] args) {
-        String name = "lololololo";
-        String categoryName = "Java";
-        Category category = new Category(categoryName);
-        category.setId(3);
-        Event newEvent = new Event(name, category);
-        newEvent.setStartDate("12.01.1999");
-
-        newEvent.setEndDate("13.01.2000");
-
-        Description description =
-                new Description("kurwa lol", "lolololol");
-        newEvent.setDescription(description);
-        EventController eventController = new EventController();
-        System.out.println(newEvent.getCategory().getId());
-
-        eventController.getDefaultDao().addEvent(newEvent);
 
     }
 

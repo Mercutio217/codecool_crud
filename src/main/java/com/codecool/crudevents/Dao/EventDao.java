@@ -29,7 +29,7 @@ public class EventDao {
                     " JOIN categories ON (events.category_id = categories.id);");
             while (dbResult.next()) {
                 Event addMe = new Event(dbResult.getInt(1), dbResult.getString(2),
-                        new Category(dbResult.getString(3)), dbResult.getString(4),
+                        Category.findByName(dbResult.getString(3)), dbResult.getString(4),
                         dbResult.getString(5),
                         new Description(dbResult.getString(6), dbResult.getString(7)));
                 result.add(addMe);
@@ -47,7 +47,7 @@ public class EventDao {
                 throw new SQLException();
             } else {
                 return new Event(dbResult.getInt(1), dbResult.getString(2),
-                        new Category(dbResult.getString(3)),
+                        Category.findByName(dbResult.getString(3)),
                         dbResult.getString(4), dbResult.getString(5),
                         new Description(dbResult.getString(6), dbResult.getString(7)));
 

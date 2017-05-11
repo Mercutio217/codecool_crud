@@ -18,11 +18,6 @@ public class Category {
         listOfCategories.add(this);
     }
 
-    public Category(String name) {
-        this.name = name;
-        listOfCategories.add(this);
-    }
-
     public Integer getId() {
         return id;
     }
